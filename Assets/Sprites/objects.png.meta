@@ -1,0 +1,545 @@
+fileFormatVersion: 2
+guid: 032921ac9c8cfbe49b7b4a2436989ce6
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: objects_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4d6a8b1dc33fa24b8ea200e734ba272
+      internalID: -1657901852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: objects_5
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa042447ff11fd949b8362ecca2292c9
+      internalID: -1120303572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: objects_10
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7dca92564c35824889fcf8cd0df0135
+      internalID: 1833347845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: objects_11
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 010648cda19905c4b9dac9e019ec0a58
+      internalID: -43413228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: objects_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 176
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.51662695, y: 0.06806946}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8d0c909cfa93954fa218cd432729a3a
+      internalID: 1833759301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: objects_59
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 144
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a740bb0be9861f54f9f58948b43b29b4
+      internalID: -120998644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: objects_128
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 48
+        height: 64
+      alignment: 9
+      pivot: {x: 0.4996253, y: 0.09569371}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d03779fc2231c44439faaf8b6acd8c57
+      internalID: -367959222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: objects_134
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad3b9cfe5e7283e4a80d9548ba18b56c
+      internalID: 2053875878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: objects_136
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 313a024396612504d94f76ccae6feac6
+      internalID: -1401572555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: objects_138
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4caeda0f6d13a9941ad7d358193f8da3
+      internalID: -230437554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      objects_0: -1657901852
+      objects_1: -1406486557
+      objects_10: 1833347845
+      objects_100: -162238762
+      objects_101: 613046400
+      objects_102: 842673085
+      objects_103: -360337917
+      objects_104: -871313436
+      objects_105: 1702405998
+      objects_106: 1413289339
+      objects_107: -899295240
+      objects_108: -1789655659
+      objects_109: 987588953
+      objects_11: -43413228
+      objects_110: -2111861549
+      objects_111: -404966976
+      objects_112: 1057308802
+      objects_113: -1442133309
+      objects_114: 1022556894
+      objects_115: -1635376152
+      objects_116: 1953129484
+      objects_117: -1985669219
+      objects_118: 1024511071
+      objects_119: 695210477
+      objects_12: -195320062
+      objects_120: 1889392986
+      objects_121: -779383178
+      objects_122: -1342439853
+      objects_123: 68469225
+      objects_124: -1797877443
+      objects_125: 941080880
+      objects_126: -940408513
+      objects_127: 2071495167
+      objects_128: -367959222
+      objects_129: 632328175
+      objects_13: -917476491
+      objects_130: -296113543
+      objects_131: -73506012
+      objects_132: -225803062
+      objects_133: -1630996631
+      objects_134: 2053875878
+      objects_135: -2067103786
+      objects_136: -1401572555
+      objects_137: 336941977
+      objects_138: -230437554
+      objects_139: 1190658347
+      objects_14: 339814482
+      objects_140: -423368089
+      objects_141: -1019462520
+      objects_142: -282248674
+      objects_143: -2019259186
+      objects_144: -991913641
+      objects_145: -1962480617
+      objects_146: 1794276335
+      objects_147: -1615258489
+      objects_148: 1617508149
+      objects_149: 646791436
+      objects_15: -2027385303
+      objects_150: 95342123
+      objects_151: 1499513609
+      objects_152: 601939782
+      objects_153: -154305945
+      objects_154: 1843903528
+      objects_155: -1206316818
+      objects_156: 1567272339
+      objects_157: 1561727121
+      objects_158: 1459259392
+      objects_159: 853405725
+      objects_16: 1833759301
+      objects_160: 457676004
+      objects_161: -203279360
+      objects_162: -1146151250
+      objects_163: 1252442174
+      objects_164: -1462081300
+      objects_165: 1488062132
+      objects_166: -299940155
+      objects_167: 1436762790
+      objects_168: 1456703295
+      objects_169: 717522151
+      objects_17: 1704436565
+      objects_170: -1347202833
+      objects_171: 1045806900
+      objects_172: 1597290222
+      objects_173: -1684834548
+      objects_174: 911549240
+      objects_175: -1299363717
+      objects_176: 1057215648
+      objects_177: 84648444
+      objects_178: 86067394
+      objects_179: 725696633
+      objects_18: 870122770
+      objects_180: -1787566279
+      objects_181: 287541286
+      objects_182: -120584871
+      objects_183: 1521306933
+      objects_184: -1224430427
+      objects_185: 1903844119
+      objects_186: 101153462
+      objects_187: 989276686
+      objects_188: -204270948
+      objects_189: 1097864365
+      objects_19: -658020816
+      objects_190: -378988378
+      objects_191: -156434181
+      objects_192: -14544961
+      objects_193: 2143005897
+      objects_194: 1046007987
+      objects_195: 612781835
+      objects_196: -1393040170
+      objects_197: 182487626
+      objects_198: -1878810415
+      objects_199: 2129623495
+      objects_2: -240972267
+      objects_20: 60838737
+      objects_200: 1445563238
+      objects_201: -336969164
+      objects_202: 825710677
+      objects_203: 852596861
+      objects_204: 573802320
+      objects_205: 1675238574
+      objects_206: 402284071
+      objects_207: -626348762
+      objects_21: 1606594934
+      objects_22: -261283146
+      objects_23: 529838674
+      objects_24: 1618330649
+      objects_25: 1647297640
+      objects_26: -1528008696
+      objects_27: 55815591
+      objects_28: 928893407
+      objects_29: 320294181
+      objects_3: -2113403280
+      objects_30: 1881498444
+      objects_31: -488105568
+      objects_32: 1998793736
+      objects_33: 1340421917
+      objects_34: -2013786591
+      objects_35: 1881548476
+      objects_36: -1691518647
+      objects_37: -2039764184
+      objects_38: -1311414293
+      objects_39: 1916788058
+      objects_4: 588562495
+      objects_40: 62413937
+      objects_41: -620043306
+      objects_42: 924172253
+      objects_43: -114412692
+      objects_44: -1582808209
+      objects_45: 1790556149
+      objects_46: 862921182
+      objects_47: 1547927035
+      objects_48: 1752270636
+      objects_49: -1632717663
+      objects_5: -1120303572
+      objects_50: 1912423553
+      objects_51: -1263063051
+      objects_52: -108384833
+      objects_53: -1921902066
+      objects_54: 294202237
+      objects_55: -344625695
+      objects_56: -1469358058
+      objects_57: 847905166
+      objects_58: -1228076882
+      objects_59: -120998644
+      objects_6: 2012099413
+      objects_60: -34116492
+      objects_61: -614840422
+      objects_62: 834186332
+      objects_63: 1498504556
+      objects_64: -52359162
+      objects_65: -213934879
+      objects_66: 264383314
+      objects_67: 884959306
+      objects_68: -629926867
+      objects_69: 2013018194
+      objects_7: -924709456
+      objects_70: -306143791
+      objects_71: 917686623
+      objects_72: -1287271013
+      objects_73: 1362023372
+      objects_74: -2021971531
+      objects_75: -370468128
+      objects_76: 882589023
+      objects_77: -654965874
+      objects_78: -1723274637
+      objects_79: 849498765
+      objects_8: -2044781139
+      objects_80: 1325395390
+      objects_81: -1037856292
+      objects_82: -320972802
+      objects_83: 575420663
+      objects_84: 322937858
+      objects_85: -52864077
+      objects_86: 1598660995
+      objects_87: -605689927
+      objects_88: -2086247710
+      objects_89: 878528502
+      objects_9: -1335682394
+      objects_90: 334263504
+      objects_91: 729202505
+      objects_92: 1713530034
+      objects_93: -341122173
+      objects_94: -1131369969
+      objects_95: -1711276268
+      objects_96: 1374722147
+      objects_97: -2065047767
+      objects_98: 1610605799
+      objects_99: -496482728
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
