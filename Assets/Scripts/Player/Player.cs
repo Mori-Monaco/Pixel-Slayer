@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     private void HandleMovement()
     {
         Vector2 inputVector = GameInput.instance.GetMovementVector();
-        inputVector = inputVector.normalized; // делает вектор по диагонали = 1
+        // inputVector = inputVector.normalized; // делает вектор по диагонали = 1 (с системой InputActions не требуется)
         rb.MovePosition(rb.position + inputVector * (movingSpeed * Time.fixedDeltaTime)); // Time.fixedDeltaTime для плавного движения
 
         if (Math.Abs(inputVector.x) > minMovingSpeed || Math.Abs(inputVector.y) > minMovingSpeed) // сравнение по модулю
