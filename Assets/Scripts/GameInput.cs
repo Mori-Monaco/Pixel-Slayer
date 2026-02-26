@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 public class GameInput : MonoBehaviour
 {
@@ -9,11 +10,20 @@ public class GameInput : MonoBehaviour
 
     private PlayerInputActions playerInputActions;
 
+    public event EventHandler OnPlayerAttack; // событие
+
     private void Awake()
     {
         instance = this;
         playerInputActions = new PlayerInputActions();
         playerInputActions.Enable();
+
+        playerInputActions.Combat.Attack.started += PlayerAttack_started; // обработчик к нажатию лкм
+    }
+
+    private void PlayerAttack_started(InputAction.CallbackContext obj)
+    {
+        OnPlayerAttack?.Invoke(this, EventArgs.Empty); // вызов события
     }
 
     public Vector2 GetMovementVector()

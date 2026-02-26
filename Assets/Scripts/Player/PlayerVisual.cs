@@ -9,11 +9,22 @@ public class PlayerVisual : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     private const string IS_RUNNING = "IsRunning";
+    private const string ATTACK = "Attack";
 
     private void Awake() // инициализируем Animator и SpriteRenderer
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void Start()
+    {
+        Player.instance.OnSwordSwing += Player_OnSwordSwing;
+    }
+
+    private void Player_OnSwordSwing(object sender, System.EventArgs e)
+    {
+        animator.SetTrigger(ATTACK);
     }
 
     private void Update()
