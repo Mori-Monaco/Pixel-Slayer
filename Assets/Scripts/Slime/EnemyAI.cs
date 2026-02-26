@@ -22,13 +22,8 @@ public class EnemyAI : MonoBehaviour
 
     private enum State // состояния
     {
-        Idle,
+        // Idle, пока нет состояния покоя
         Roaming
-    }
-
-    private void Start()
-    {
-        startingPosition = transform.position;
     }
 
     private void Awake()
@@ -44,8 +39,8 @@ public class EnemyAI : MonoBehaviour
         switch (state)
         {
             default:
-            case State.Idle:
-                break;
+            //case State.Idle: пока нет состояния покоя
+            //    break;
             case State.Roaming:
                 roamingTime -= Time.deltaTime; // уменьшаем время
                 if (roamingTime < 0)
@@ -59,12 +54,26 @@ public class EnemyAI : MonoBehaviour
 
     private void Roaming()
     {
+        startingPosition = transform.position; // обновляем позицию
         roamPosition = GetRoamingPosition(); // ищем новую точку
+        ChangeFacingDirection(startingPosition, roamPosition); // поворачиваем врага к цели
         navMeshAgent.SetDestination(roamPosition); // отправляем агента к этой точке
     }
 
     private Vector3 GetRoamingPosition()
     {
-        return startingPosition + SlayerUtils.GetRandomDir() * UnityEngine.Random.Range(roamingDistanceMin, roamingDistanceMax);
+        return startingPosition + SlayerUtils.GetRandomDir() * UnityEngine.Random.Range(roamingDistanceMin, roamingDistanceMax); // получаем новую точку назначения
+    }
+
+    private void ChangeFacingDirection(Vector3 sourcePosition, Vector3 targetPosition) // поворот в сторону движения
+    {
+        if (sourcePosition.x > targetPosition.x) // если положение правее чем цель
+        {
+            transform.rotation = Quaternion.Euler(0, -180, 0);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
     }
 }
