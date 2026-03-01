@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 225199086447757511}
   - component: {fileID: 3999493164102383509}
   - component: {fileID: 2723345168528341571}
+  - component: {fileID: 9086886316720188876}
   m_Layer: 0
   m_Name: Orc
   m_TagString: Untagged
@@ -230,13 +231,13 @@ MonoBehaviour:
   _startingState: 1
   _roamingDistanceMax: 7
   _roamingDistanceMin: 3
-  _roamingTimerMax: 10
+  _roamingTimerMax: 2
   _isChasingEnemy: 1
   _chasingDistance: 4
   _chasingSpeedMultiplier: 2
-  _isAttackingEnemy: 0
+  _isAttackingEnemy: 1
   _attackingDistance: 2
-  _attackCooldown: 2
+  _attackCooldown: 1
 --- !u!114 &2723345168528341571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,7 +250,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f2ccfd6cacae4c47bca030dbd20219b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 20
+  _enemySO: {fileID: 11400000, guid: 453b8af1f39b5684cb67556ca18cc072, type: 2}
+--- !u!60 &9086886316720188876
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2912134824457447821}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.4846327, y: 0.42929518}
+      - {x: 1.2346752, y: 0.82212013}
+      - {x: 0.9889792, y: 1.1400617}
+      - {x: 0.57421863, y: 1.3486311}
+      - {x: 0.02720666, y: 1.4772071}
+      - {x: 0.005785227, y: 0.934168}
+      - {x: -0.016201794, y: 0.24224165}
+      - {x: -0.055090964, y: -0.33379227}
+      - {x: 0.9810178, y: -0.3341701}
+      - {x: 1.3444426, y: -0.32620808}
+      - {x: 1.503133, y: -0.121086195}
+      - {x: 1.514811, y: 0.19866803}
+  m_UseDelaunayMesh: 0
 --- !u!1 &7974061385750316154
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,3 +429,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyAI: {fileID: 3999493164102383509}
+  _enemyEntity: {fileID: 2723345168528341571}
+  _enemyShadow: {fileID: 2579947814754565479}

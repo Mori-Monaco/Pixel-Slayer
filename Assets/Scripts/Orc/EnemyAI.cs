@@ -8,7 +8,8 @@ using UnityEngine.EventSystems;
 using System;
 
 
-public class EnemyAI : MonoBehaviour {
+public class EnemyAI : MonoBehaviour
+{
 
     [SerializeField] private State _startingState;           // выбор состояния
     [SerializeField] private float _roamingDistanceMax = 7f; // макс. расстояние
@@ -20,8 +21,8 @@ public class EnemyAI : MonoBehaviour {
     [SerializeField] private float _chasingSpeedMultiplier = 2f;
 
     [SerializeField] private bool _isAttackingEnemy = false; // атакующий ли враг
-    [SerializeField] private float _attackingDistance = 2f;
-    [SerializeField] private float _attackCooldown = 2f; // задержка между атаками
+    [SerializeField] private float _attackingDistance = 1.5f;
+    [SerializeField] private float _attackCooldown = 1f; // задержка между атаками
     private float _nextAttackTime = 0f;
 
     private NavMeshAgent _navMeshAgent;
@@ -39,8 +40,6 @@ public class EnemyAI : MonoBehaviour {
 
     public event EventHandler OnEnemyAttack;
 
-
-
     private enum State // состояния
     {
         Idle,
@@ -50,7 +49,8 @@ public class EnemyAI : MonoBehaviour {
         Death
     }
 
-    private void Awake() {
+    private void Awake()
+    {
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _navMeshAgent.updateRotation = false;
         _navMeshAgent.updateUpAxis = false;
@@ -60,17 +60,45 @@ public class EnemyAI : MonoBehaviour {
         _chasingSpeed = _navMeshAgent.speed * _chasingSpeedMultiplier;
     }
 
-    private void Update() 
+    private void Update()
     {
         StateHandler(); // проверка текущего состояния
         MovementDirectionHandler(); // проверка направления
     }
 
-    private void StateHandler() {
-        switch (_currentState) {
+    public void SetDeathState()
+    {
+        _navMeshAgent.ResetPath();
+        _currentState = State.Death;
+    }
+
+    public float GetRoamingAnimationSpeed()
+    {
+        return _navMeshAgent.speed / _roamingSpeed;
+    }
+
+    public bool IsRunning()
+    {
+        if (_navMeshAgent.velocity == Vector3.zero) // если враг бежит
+        { 
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+
+
+    private void StateHandler()
+    {
+        switch (_currentState)
+        {
             case State.Roaming:
                 _roamingTimer -= Time.deltaTime;     // уменьшаем время
-                if (_roamingTimer < 0) {
+                if (_roamingTimer < 0)
+                {
                     Roaming();                     // назначаем новую точку
                     _roamingTimer = _roamingTimerMax; // обнуляем таймер
                 }
@@ -98,33 +126,42 @@ public class EnemyAI : MonoBehaviour {
 
 
 
-    private void CheckCurrentState() {
-        float distanceToPlayer = Vector3.Distance(transform.position, Player.instance.transform.position); // рассчет растояния до игрока
+    private void CheckCurrentState()
+    {
+        float distanceToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position); // рассчет растояния до игрока
         State newState = State.Roaming;
 
-        if (_isChasingEnemy) {      // если враг преследующий
-            if (distanceToPlayer <= _chasingDistance) { // если расстояние достаточно маленькое
+        if (_isChasingEnemy) // если враг преследующий
+        {      
+            if (distanceToPlayer <= _chasingDistance) // если расстояние достаточно маленькое
+            { 
                 newState = State.Chasing;
             }
         }
 
-        if (_isAttackingEnemy) {
-            if (distanceToPlayer <= _attackingDistance) {
+        if (_isAttackingEnemy)
+        {
+            if (distanceToPlayer <= _attackingDistance)
+            {
                 newState = State.Attacking;
             }
 
         }
 
-        if (newState != _currentState) {
-            if (newState == State.Chasing) { // если перешел в преследование
+        if (newState != _currentState)
+        {
+            if (newState == State.Chasing) // если перешел в преследование
+            { 
                 _navMeshAgent.ResetPath(); // сброс прошлой цели
                 _navMeshAgent.speed = _chasingSpeed;
             }
-            else if (newState == State.Roaming) {
+            else if (newState == State.Roaming)
+            {
                 _roamingTimer = 0f;
                 _navMeshAgent.speed = _roamingSpeed;
             }
-            else if (newState == State.Attacking) {
+            else if (newState == State.Attacking)
+            {
                 _navMeshAgent.ResetPath();
             }
 
@@ -132,16 +169,16 @@ public class EnemyAI : MonoBehaviour {
         }
     }
 
-    private void ChasingTarget() {
-        _navMeshAgent.SetDestination(Player.instance.transform.position);
+    private void ChasingTarget()
+    {
+        _navMeshAgent.SetDestination(Player.Instance.transform.position);
     }
 
-    public float GetRoamingAnimationSpeed() {
-        return _navMeshAgent.speed / _roamingSpeed;
-    }
 
-    private void AttackingTarget() {
-        if (Time.time > _nextAttackTime) {
+    private void AttackingTarget()
+    {
+        if (Time.time > _nextAttackTime)
+        {
             OnEnemyAttack?.Invoke(this, EventArgs.Empty); // выполняем событие атаки
 
             _nextAttackTime = Time.time + _attackCooldown; // устанавливаем задержку 2 сек.
@@ -149,12 +186,17 @@ public class EnemyAI : MonoBehaviour {
 
     }
 
-    private void MovementDirectionHandler() {
-        if (Time.time >_nextCheckDirectionTime) { // если время проверки наступило
-            if (IsRunning()) {
+    private void MovementDirectionHandler()
+    {
+        if (Time.time > _nextCheckDirectionTime) // если время проверки наступило
+        { 
+            if (IsRunning())
+            {
                 ChangeFacingDirection(_lastPosition, transform.position); // поворот в сторону цели
-            } else if (_currentState == State.Attacking) { // если атака
-                ChangeFacingDirection(transform.position, Player.instance.transform.position); // повернуться к игроку
+            }
+            else if (_currentState == State.Attacking) // если атака
+            { 
+                ChangeFacingDirection(transform.position, Player.Instance.transform.position); // повернуться к игроку
             }
 
             _lastPosition = transform.position;
@@ -162,23 +204,15 @@ public class EnemyAI : MonoBehaviour {
         }
     }
 
-
-    public bool IsRunning() {
-        if (_navMeshAgent.velocity == Vector3.zero) { // если враг бежит
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
-
-    private void Roaming() {
+    private void Roaming()
+    {
         _startingPosition = transform.position; // обновляем позицию
         _roamPosition = GetRoamingPosition(); // ищем новую точку
         _navMeshAgent.SetDestination(_roamPosition);  // отправляем к этой точке
     }
 
-    private Vector3 GetRoamingPosition() {
+    private Vector3 GetRoamingPosition()
+    {
         return _startingPosition + SlayerUtils.GetRandomDir() * UnityEngine.Random.Range(_roamingDistanceMin, _roamingDistanceMax); // получаем новую точку назначения
     }
 
@@ -188,8 +222,10 @@ public class EnemyAI : MonoBehaviour {
         {
             transform.rotation = Quaternion.Euler(0, -180, 0);
         }
-        else {
+        else
+        {
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
+
 }

@@ -9,6 +9,7 @@ public class PlayerVisual : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     private const string IS_RUNNING = "IsRunning";
+    private const string IS_DIE = "IsDie";
     private const string ATTACK = "Attack";
 
     private void Awake() // инициализируем Animator и SpriteRenderer
@@ -17,34 +18,49 @@ public class PlayerVisual : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void Start() {
+    private void Start()
+    {
         Sword.Instance.OnSwordSwing += Player_OnSwordSwing;
+        Player.Instance.OnPlayerDeath += Instance_OnPlayerDeath;
     }
 
-    private void Player_OnSwordSwing(object sender, System.EventArgs e) {
+    private void Instance_OnPlayerDeath(object sender, System.EventArgs e)
+    {
+        animator.SetBool(IS_DIE, true);
+    }
+
+    private void Player_OnSwordSwing(object sender, System.EventArgs e)
+    {
         animator.SetTrigger(ATTACK);
     }
 
-    private void Update() {
-        animator.SetBool(IS_RUNNING, Player.instance.IsRunning()); // меняем значение IsRunning в аниматоре
-        AdjustPlayerFacingDirection();
+    private void Update()
+    {
+        animator.SetBool(IS_RUNNING, Player.Instance.IsRunning()); // меняем значение IsRunning в аниматоре
+
+        if (Player.Instance.IsAlive())
+        {
+            AdjustPlayerFacingDirection();
+        }
     }
 
-    public void TriggerEndAttackAnimation() { // конец анимации удара
-        Sword.Instance.AttackColliderTurnOff();
+    public void TriggerEndAttackAnimation()
+    { // конец анимации удара
+        //Sword.Instance.AttackColliderTurnOff();
     }
 
 
     private void AdjustPlayerFacingDirection() // Поворачиваем PlayerVisual, т.к. к Player привязана MainCamera
     {
         Vector3 mousePos = GameInput.instance.GetMousePosition();           // получаем позицию курсора
-        Vector3 playerPosition = Player.instance.GetPlayerScreenPosition(); // получаем позицию игрока
+        Vector3 playerPosition = Player.Instance.GetPlayerScreenPosition(); // получаем позицию игрока
 
         if (mousePos.x < playerPosition.x) // если курсор левее игрока
         {
             spriteRenderer.flipX = true; // поворачиваем спрайт влево
         }
-        else {
+        else
+        {
             spriteRenderer.flipX = false;
         }
     }

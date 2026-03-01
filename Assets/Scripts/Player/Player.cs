@@ -7,34 +7,103 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public event EventHandler OnPlayerDeath;
 
-    public static Player instance { get; private set; } // singltone pattern
+    public static Player Instance { get; private set; } // singltone pattern
 
-    [SerializeField] private float movingSpeed = 5f; // SerializeField - видимость в инспекторе
+    [SerializeField] private float _movingSpeed = 5f; // SerializeField - видимость в инспекторе
+    [SerializeField] private int _maxHealth = 10;
+    [SerializeField] private float _damageRecoveryTime = 0.5f;
+
+
     Vector2 inputVector;
 
-    private Rigidbody2D rb;
+    private Rigidbody2D _rb;
+    private KnockBack _knockBack;
 
-    private float minMovingSpeed = 0.1f; // минимальная скорость для анимации покоя
-    private bool isRunning = false;
+    private float _minMovingSpeed = 0.1f; // минимальная скорость для анимации покоя
+    private bool _isRunning = false;
+
+    private int _currentHealth;
+    private bool _canTakeDamage;
+    private bool _isAlive;
 
 
-    private void Awake() {
-        instance = this;
-        rb = GetComponent<Rigidbody2D>(); // инициализация RigidBody
+    private void Awake()
+    {
+        Instance = this;
+        _rb = GetComponent<Rigidbody2D>(); // инициализация RigidBody
+        _knockBack = GetComponent<KnockBack>();
     }
 
-    private void Start() {
+    private void Start()
+    {
+        _canTakeDamage = true;
+        _currentHealth = _maxHealth;
         GameInput.instance.OnPlayerAttack += Player_OnPlayerAttack;
+        _isAlive = true;
     }
 
-    private void Update() {
+    private void Update()
+    {
         inputVector = GameInput.instance.GetMovementVector(); // получение вектора движения
 
     }
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
+        if (_knockBack.IsGettingKnockBack)
+            return;
+
         HandleMovement();
+    }
+
+    public bool IsAlive() => _isAlive;
+
+    public void TakeDamage(Transform damageSource, int damage)
+    {
+        if (_canTakeDamage && _isAlive)
+        {
+            _canTakeDamage = false;
+            _currentHealth = Math.Max(0, _currentHealth -= damage);
+            Debug.Log(_currentHealth);
+            _knockBack.GetKnockBack(damageSource);
+
+            StartCoroutine(DamageRecoveryRoutine());
+        }
+
+        DetectDeath();
+    }
+
+    private void DetectDeath()
+    {
+        if (_currentHealth == 0 && _isAlive)
+        {
+            _canTakeDamage = false;
+            _isAlive = false;
+            _knockBack.StopKnockBackMovement();
+            GameInput.instance.DisabledMovement();
+
+            OnPlayerDeath?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    private IEnumerator DamageRecoveryRoutine() // задержка при получении урона
+    {
+        yield return new WaitForSeconds(_damageRecoveryTime);
+        _canTakeDamage = true;
+    }
+
+
+    public bool IsRunning()
+    {
+        return _isRunning;
+    }
+
+    public Vector3 GetPlayerScreenPosition()
+    {
+        Vector3 playerScreenPosition = Camera.main.WorldToScreenPoint(transform.position);
+        return playerScreenPosition;
     }
 
 
@@ -44,29 +113,19 @@ public class Player : MonoBehaviour
     }
 
 
-
-
-
-    private void HandleMovement() {
+    private void HandleMovement()
+    {
         // inputVector = inputVector.normalized; // делает вектор по диагонали = 1 (с системой InputActions не требуется)
-        rb.MovePosition(rb.position + inputVector * (movingSpeed * Time.fixedDeltaTime)); // Time.fixedDeltaTime для плавного движения
+        _rb.MovePosition(_rb.position + inputVector * (_movingSpeed * Time.fixedDeltaTime)); // Time.fixedDeltaTime для плавного движения
 
-        if (Math.Abs(inputVector.x) > minMovingSpeed || Math.Abs(inputVector.y) > minMovingSpeed) // сравнение по модулю
+        if (Math.Abs(inputVector.x) > _minMovingSpeed || Math.Abs(inputVector.y) > _minMovingSpeed) // сравнение по модулю
         {
-            isRunning = true;
+            _isRunning = true;
         }
-        else {
-            isRunning = false;
+        else
+        {
+            _isRunning = false;
         }
-    }
-
-    public bool IsRunning() {
-        return isRunning;
-    }
-
-    public Vector3 GetPlayerScreenPosition() {
-        Vector3 playerScreenPosition = Camera.main.WorldToScreenPoint(transform.position);
-        return playerScreenPosition;
     }
 
 }
