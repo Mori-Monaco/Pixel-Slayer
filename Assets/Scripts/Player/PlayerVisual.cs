@@ -17,28 +17,25 @@ public class PlayerVisual : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void Start()
-    {
-        Player.instance.OnSwordSwing += Player_OnSwordSwing;
+    private void Start() {
+        Sword.Instance.OnSwordSwing += Player_OnSwordSwing;
     }
 
-    private void Player_OnSwordSwing(object sender, System.EventArgs e)
-    {
+    private void Player_OnSwordSwing(object sender, System.EventArgs e) {
         animator.SetTrigger(ATTACK);
     }
 
-    private void Update()
-    {
-        animator.SetBool(IS_RUNNING, Player.instance.IsRunning()); // провер€ем состо€ние геро€ и мен€ем
-                                                                   // значение IsRunning в аниматоре
-
-        AdjustPlayerFacingDirection(); // взгл€д игрока в сторону курсора
+    private void Update() {
+        animator.SetBool(IS_RUNNING, Player.instance.IsRunning()); // мен€ем значение IsRunning в аниматоре
+        AdjustPlayerFacingDirection();
     }
 
-    // ¬ј∆Ќќ: ѕоворачиваем именно PlayerVisual, потому что MainCamera будет прив€зана к Player,
-    // и при повороте игрока камера не должна переворачиватьс€
+    public void TriggerEndAttackAnimation() { // конец анимации удара
+        Sword.Instance.AttackColliderTurnOff();
+    }
 
-    private void AdjustPlayerFacingDirection()
+
+    private void AdjustPlayerFacingDirection() // ѕоворачиваем PlayerVisual, т.к. к Player прив€зана MainCamera
     {
         Vector3 mousePos = GameInput.instance.GetMousePosition();           // получаем позицию курсора
         Vector3 playerPosition = Player.instance.GetPlayerScreenPosition(); // получаем позицию игрока
@@ -47,9 +44,8 @@ public class PlayerVisual : MonoBehaviour
         {
             spriteRenderer.flipX = true; // поворачиваем спрайт влево
         }
-        else
-        {
-            spriteRenderer.flipX = false; 
+        else {
+            spriteRenderer.flipX = false;
         }
     }
 }
