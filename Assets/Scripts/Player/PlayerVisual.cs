@@ -6,7 +6,8 @@ using UnityEngine;
 public class PlayerVisual : MonoBehaviour
 {
     private Animator animator;
-    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer _spriteRenderer;
+    private FlashBlink _flashBlink;
 
     private const string IS_RUNNING = "IsRunning";
     private const string IS_DIE = "IsDie";
@@ -15,7 +16,8 @@ public class PlayerVisual : MonoBehaviour
     private void Awake() // инициализируем Animator и SpriteRenderer
     {
         animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _flashBlink = GetComponent<FlashBlink>();
     }
 
     private void Start()
@@ -27,6 +29,7 @@ public class PlayerVisual : MonoBehaviour
     private void Instance_OnPlayerDeath(object sender, System.EventArgs e)
     {
         animator.SetBool(IS_DIE, true);
+        _flashBlink.StopBlinking();
     }
 
     private void Player_OnSwordSwing(object sender, System.EventArgs e)
@@ -57,11 +60,11 @@ public class PlayerVisual : MonoBehaviour
 
         if (mousePos.x < playerPosition.x) // если курсор левее игрока
         {
-            spriteRenderer.flipX = true; // поворачиваем спрайт влево
+            _spriteRenderer.flipX = true; // поворачиваем спрайт влево
         }
         else
         {
-            spriteRenderer.flipX = false;
+            _spriteRenderer.flipX = false;
         }
     }
 }

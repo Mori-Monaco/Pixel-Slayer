@@ -8,6 +8,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public event EventHandler OnPlayerDeath;
+    public event EventHandler OnFlashBlink;
+
 
     public static Player Instance { get; private set; } // singltone pattern
 
@@ -68,6 +70,8 @@ public class Player : MonoBehaviour
             _currentHealth = Math.Max(0, _currentHealth -= damage);
             Debug.Log(_currentHealth);
             _knockBack.GetKnockBack(damageSource);
+
+            OnFlashBlink?.Invoke(this, EventArgs.Empty);
 
             StartCoroutine(DamageRecoveryRoutine());
         }
