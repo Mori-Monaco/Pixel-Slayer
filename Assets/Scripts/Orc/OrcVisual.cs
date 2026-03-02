@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 // обязательные объекты
@@ -34,6 +35,18 @@ public class OrcVisual : MonoBehaviour
         _enemyEntity.OnDeath += _enemyEntity_OnDeath;
     }
 
+    public void TriggerAttackAnimationTurnOff()
+    {
+        _enemyEntity.PolygonColliderTurnOff();
+    }
+
+    public void TriggerAttackAnimationTurnOn()
+    {
+        _enemyEntity.PolygonColliderTurnOn();
+    }
+
+
+
     private void _enemyEntity_OnDeath(object sender, System.EventArgs e)
     {
         _animator.SetBool(IS_DIE, true);
@@ -52,23 +65,15 @@ public class OrcVisual : MonoBehaviour
         _animator.SetFloat(CHASING_SPEED_MULTIPLIER, _enemyAI.GetRoamingAnimationSpeed());
     }
 
-    private void OnDestroy()
-    {
-        _enemyAI.OnEnemyAttack -= _enemyAI_OnEnemyAttack;
-    }
-
-    public void TriggerAttackAnimationTurnOff()
-    {
-        _enemyEntity.PolygonColliderTurnOff();
-    }
-
-    public void TriggerAttackAnimationTurnOn()
-    {
-        _enemyEntity.PolygonColliderTurnOn();
-    }
-
     private void _enemyAI_OnEnemyAttack(object sender, System.EventArgs e)
     {
         _animator.SetTrigger(ATTACK);
+    }
+
+    private void OnDestroy()
+    {
+        _enemyAI.OnEnemyAttack -= _enemyAI_OnEnemyAttack;
+        _enemyEntity.OnTakeHit -= _enemyEntity_OnTakeHit;
+        _enemyEntity.OnDeath -= _enemyEntity_OnDeath;
     }
 }

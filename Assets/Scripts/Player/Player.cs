@@ -132,4 +132,9 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        GameInput.instance.OnPlayerAttack -= Player_OnPlayerAttack;
+    }
+
 }
