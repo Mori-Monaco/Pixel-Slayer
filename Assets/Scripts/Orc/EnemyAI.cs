@@ -18,8 +18,9 @@ public class EnemyAI : MonoBehaviour
 
     [SerializeField] private bool isAttackingEnemy = true; // атакующий ли враг
     [SerializeField] private float attackCooldown = 1f; // задержка
-    [SerializeField] private float attackingDistance = 1.5f;
+    [SerializeField] private float attackingDistance = 2f; // дистанция атаки
 
+    public event EventHandler OnEnemyAttack;
 
     private float _nextAttackTime = 0f;
 
@@ -33,10 +34,9 @@ public class EnemyAI : MonoBehaviour
     private float _chasingSpeed;
 
     private Vector3 _lastPosition;
-    private float _nextCheckDirectionTime = 0f; // время когда будет проверка направления
-    private float _CheckDirectionDuration = 0.1f; // как часто будет проверка
+    private float _nextCheckDirectionTime = 0f; // время след. проверки направления
+    private float _CheckDirectionDuration = 0.1f; // шаг между проверками
 
-    public event EventHandler OnEnemyAttack;
 
     public bool IsRunning => _navMeshAgent.velocity != Vector3.zero; // бежит ли враг
 
@@ -56,8 +56,8 @@ public class EnemyAI : MonoBehaviour
         _navMeshAgent.updateUpAxis = false;
         _currentState = startingState;
 
-        _roamingSpeed = _navMeshAgent.speed;
         _chasingSpeed = _navMeshAgent.speed * chasingSpeedMultiplier;
+        _roamingSpeed = _navMeshAgent.speed;
     }
 
     private void Update()
@@ -113,7 +113,6 @@ public class EnemyAI : MonoBehaviour
     }
 
 
-
     private void CheckCurrentState()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position); // рассчет растояния до игрока
@@ -122,18 +121,13 @@ public class EnemyAI : MonoBehaviour
         if (isChasingEnemy) // если враг преследующий
         {      
             if (distanceToPlayer <= chasingDistance) // если расстояние достаточно маленькое
-            { 
                 newState = State.Chasing;
-            }
         }
 
         if (isAttackingEnemy)
         {
             if (distanceToPlayer <= attackingDistance)
-            {
                 newState = Player.Instance.IsAlive() ? State.Attacking : State.Roaming; // если игрок жив то атаковать
-            }
-
         }
 
         if (newState != _currentState)

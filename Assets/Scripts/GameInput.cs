@@ -8,7 +8,8 @@ public class GameInput : MonoBehaviour
 
     private PlayerInputActions _playerInputActions;
 
-    public event EventHandler OnPlayerAttack; // событие
+    public event EventHandler OnPlayerAttack; // событие атаки
+    public event EventHandler OnPlayerDash; // событие рывка
 
     private void Awake()
     {
@@ -17,6 +18,12 @@ public class GameInput : MonoBehaviour
         _playerInputActions.Enable();
 
         _playerInputActions.Combat.Attack.started += PlayerAttack_started; // обработчик к нажатию лкм
+        _playerInputActions.Player.Dash.performed += PlayerDash_performed;
+    }
+
+    private void PlayerDash_performed(InputAction.CallbackContext obj)
+    {
+        OnPlayerDash?.Invoke(this, EventArgs.Empty);
     }
 
     public void DisabledMovement()
