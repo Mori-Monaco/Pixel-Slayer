@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b9bf7b548318714bba092e481e44035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destructiblePlant: {fileID: 4834591206343523850}
-  _rockDeathVFXPrefab: {fileID: 4542582724286262722, guid: 94b2953770e892b45a4e9a1eb7d6c3ba, type: 3}
+  destructiblePlant: {fileID: 4834591206343523850}
+  rockDeathVFXPrefab: {fileID: 4542582724286262722, guid: 94b2953770e892b45a4e9a1eb7d6c3ba, type: 3}
 --- !u!1 &2447078994290751733
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 
 public class GameInput : MonoBehaviour
 {
-    public static GameInput instance { get; private set; } // singletone pattern
+    public static GameInput Instance { get; private set; } // singletone pattern
 
     private PlayerInputActions _playerInputActions;
 
@@ -14,7 +12,7 @@ public class GameInput : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
         _playerInputActions = new PlayerInputActions();
         _playerInputActions.Enable();
 
@@ -32,11 +30,13 @@ public class GameInput : MonoBehaviour
         return inputVector;
     }
 
-    public Vector3 GetMousePosition()
+    public Vector2 GetMousePosition()
     {
-        Vector3 mousePos = Mouse.current.position.ReadValue();
+        Vector2 mousePos = Mouse.current.position.ReadValue();
         return mousePos;
     }
+
+
 
     private void PlayerAttack_started(InputAction.CallbackContext obj)
     {

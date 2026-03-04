@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class SelfDestroyVFX : MonoBehaviour
 {
-    private ParticleSystem ps;
+    private ParticleSystem _ps;
 
     private void Awake()
     {
-        ps = GetComponent<ParticleSystem>();
+        _ps = GetComponent<ParticleSystem>();
     }
 
     private void Update()
     {
-        if (ps && !ps.IsAlive()) // если система существует и не проигрывается
+        if (_ps && !_ps.IsAlive()) // если система существует и не проигрывается
         {
             DestroySelf();
         }

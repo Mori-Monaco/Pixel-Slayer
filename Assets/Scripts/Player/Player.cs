@@ -23,12 +23,15 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rb;
     private KnockBack _knockBack;
 
-    private float _minMovingSpeed = 0.1f; // минимальная скорость для анимации покоя
+    private readonly float _minMovingSpeed = 0.1f; // минимальная скорость для анимации покоя
     private bool _isRunning = false;
 
     private int _currentHealth;
     private bool _canTakeDamage;
     private bool _isAlive;
+    public bool IsAlive() => _isAlive;
+
+    private Camera _mainCamera;
 
 
     private void Awake()
@@ -36,19 +39,20 @@ public class Player : MonoBehaviour
         Instance = this;
         _rb = GetComponent<Rigidbody2D>(); // инициализация RigidBody
         _knockBack = GetComponent<KnockBack>();
+        _mainCamera = Camera.main; // кеширование объекта MainCamera
     }
 
     private void Start()
     {
         _canTakeDamage = true;
         _currentHealth = _maxHealth;
-        GameInput.instance.OnPlayerAttack += Player_OnPlayerAttack;
+        GameInput.Instance.OnPlayerAttack += Player_OnPlayerAttack;
         _isAlive = true;
     }
 
     private void Update()
     {
-        inputVector = GameInput.instance.GetMovementVector(); // получение вектора движения
+        inputVector = GameInput.Instance.GetMovementVector(); // получение вектора движения
 
     }
 
@@ -60,7 +64,6 @@ public class Player : MonoBehaviour
         HandleMovement();
     }
 
-    public bool IsAlive() => _isAlive;
 
     public void TakeDamage(Transform damageSource, int damage)
     {
@@ -79,6 +82,17 @@ public class Player : MonoBehaviour
         DetectDeath();
     }
 
+    public bool IsRunning()
+    {
+        return _isRunning;
+    }
+
+    public Vector3 GetPlayerScreenPosition()
+    {
+        Vector3 playerScreenPosition = _mainCamera.WorldToScreenPoint(transform.position);
+        return playerScreenPosition;
+    }
+
     private void DetectDeath()
     {
         if (_currentHealth == 0 && _isAlive)
@@ -86,7 +100,7 @@ public class Player : MonoBehaviour
             _canTakeDamage = false;
             _isAlive = false;
             _knockBack.StopKnockBackMovement();
-            GameInput.instance.DisabledMovement();
+            GameInput.Instance.DisabledMovement();
 
             OnPlayerDeath?.Invoke(this, EventArgs.Empty);
         }
@@ -97,19 +111,6 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(_damageRecoveryTime);
         _canTakeDamage = true;
     }
-
-
-    public bool IsRunning()
-    {
-        return _isRunning;
-    }
-
-    public Vector3 GetPlayerScreenPosition()
-    {
-        Vector3 playerScreenPosition = Camera.main.WorldToScreenPoint(transform.position);
-        return playerScreenPosition;
-    }
-
 
     private void Player_OnPlayerAttack(object sender, EventArgs e) // функция при нажатии ЛКМ
     {
@@ -134,7 +135,7 @@ public class Player : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameInput.instance.OnPlayerAttack -= Player_OnPlayerAttack;
+        GameInput.Instance.OnPlayerAttack -= Player_OnPlayerAttack;
     }
 
 }

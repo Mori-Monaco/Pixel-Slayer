@@ -8,14 +8,13 @@ using UnityEngine;
 
 public class EnemyEntity : MonoBehaviour
 {
-    [SerializeField] private EnemySO _enemySO;
+    [SerializeField] private EnemySO enemySO;
 
 
     public event EventHandler OnTakeHit;
     public event EventHandler OnDeath;
 
-    //[SerializeField] private int _maxHealth; // максимальное здоровье врага
-    private int _currentHealth;              // текущеее здоровье
+    private int _currentHealth;    // текущеее здоровье
 
     private PolygonCollider2D _polygonCollider2D;
     private BoxCollider2D _boxCollider2D;
@@ -30,14 +29,14 @@ public class EnemyEntity : MonoBehaviour
 
     private void Start()
     {
-        _currentHealth = _enemySO.enemyHealth;
+        _currentHealth = enemySO.enemyHealth;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.transform.TryGetComponent(out Player player))
         {
-            player.TakeDamage(transform, _enemySO.enemyDamageAmount);
+            player.TakeDamage(transform, enemySO.enemyDamageAmount);
         }
     }
 

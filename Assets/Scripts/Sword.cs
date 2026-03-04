@@ -6,7 +6,7 @@ using UnityEngine;
 public class Sword : MonoBehaviour
 {
 
-    [SerializeField] private int _damageAmount = 2; // наносимый урон врагу
+    [SerializeField] private int damageAmount = 2; // наносимый урон врагу
     public static Sword Instance { get; private set; }
 
     private PolygonCollider2D _polygonCollider2D;
@@ -34,6 +34,8 @@ public class Sword : MonoBehaviour
     //    OnSwordSwing?.Invoke(this, EventArgs.Empty);
     //}
 
+
+
     public void Attack()
     {
         _polygonCollider2D.enabled = true;  // включаем коллайдер
@@ -56,13 +58,13 @@ public class Sword : MonoBehaviour
     { // коллизия меча и врага
         if (collision.transform.TryGetComponent(out EnemyEntity enemyEntity))
         {
-            enemyEntity.TakeDamage(_damageAmount);
+            enemyEntity.TakeDamage(damageAmount);
         }
     }
 
     private void FollowMousePosition()
     {
-        Vector3 mousePos = GameInput.instance.GetMousePosition();           // получаем позицию курсора
+        Vector3 mousePos = GameInput.Instance.GetMousePosition();           // получаем позицию курсора
         Vector3 playerPosition = Player.Instance.GetPlayerScreenPosition(); // получаем позицию игрока
 
         if (mousePos.x < playerPosition.x)

@@ -1,51 +1,53 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
 public class PlayerVisual : MonoBehaviour
 {
-    private Animator animator;
+    private static readonly int Die = Animator.StringToHash(IsDie);  // хэширование
+    private static readonly int Running = Animator.StringToHash(IsRunning);
+    private static readonly int AttackHash = Animator.StringToHash(Attack);
+    
     private SpriteRenderer _spriteRenderer;
     private FlashBlink _flashBlink;
+    private Animator _animator;
 
-    private const string IS_RUNNING = "IsRunning";
-    private const string IS_DIE = "IsDie";
-    private const string ATTACK = "Attack";
+    private const string IsRunning = "IsRunning";
+    private const string Attack = "Attack";
+    private const string IsDie = "IsDie";
 
     private void Awake() // инициализируем Animator и SpriteRenderer
     {
-        animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _flashBlink = GetComponent<FlashBlink>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Start()
     {
+        Player.Instance.OnPlayerDeath += Instance_OnPlayerDeath; // подписка на события
         Sword.Instance.OnSwordSwing += Player_OnSwordSwing;
-        Player.Instance.OnPlayerDeath += Instance_OnPlayerDeath;
     }
+
+    private void Update()
+    {
+        _animator.SetBool(Running, Player.Instance.IsRunning()); // задаем IsRunning в аниматоре
+
+        if (Player.Instance.IsAlive())
+            AdjustPlayerFacingDirection();
+    }
+
 
     private void Instance_OnPlayerDeath(object sender, System.EventArgs e)
     {
-        animator.SetBool(IS_DIE, true);
+        _animator.SetBool(Die, true);
         _flashBlink.StopBlinking();
     }
 
     private void Player_OnSwordSwing(object sender, System.EventArgs e)
     {
-        animator.SetTrigger(ATTACK);
+        _animator.SetTrigger(AttackHash);
     }
 
-    private void Update()
-    {
-        animator.SetBool(IS_RUNNING, Player.Instance.IsRunning()); // меняем значение IsRunning в аниматоре
-
-        if (Player.Instance.IsAlive())
-        {
-            AdjustPlayerFacingDirection();
-        }
-    }
 
     public void TriggerEndAttackAnimation()
     { // конец анимации удара
@@ -55,17 +57,10 @@ public class PlayerVisual : MonoBehaviour
 
     private void AdjustPlayerFacingDirection() // Поворачиваем PlayerVisual, т.к. к Player привязана MainCamera
     {
-        Vector3 mousePos = GameInput.instance.GetMousePosition();           // получаем позицию курсора
-        Vector3 playerPosition = Player.Instance.GetPlayerScreenPosition(); // получаем позицию игрока
+        Vector3 mousePos = GameInput.Instance.GetMousePosition();           // получаем поз. курсора
+        Vector3 playerPosition = Player.Instance.GetPlayerScreenPosition(); // получаем поз. игрока
 
-        if (mousePos.x < playerPosition.x) // если курсор левее игрока
-        {
-            _spriteRenderer.flipX = true; // поворачиваем спрайт влево
-        }
-        else
-        {
-            _spriteRenderer.flipX = false;
-        }
+        _spriteRenderer.flipX = mousePos.x < playerPosition.x; // если курсор левее игрока поворот = true
     }
 
     private void OnDestroy()

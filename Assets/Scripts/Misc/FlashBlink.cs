@@ -3,9 +3,9 @@ using UnityEngine;
 public class FlashBlink : MonoBehaviour
 {
 
-    [SerializeField] private MonoBehaviour _damagableObject;
-    [SerializeField] private Material _blinkMaterial;
-    [SerializeField] private float _blinkDuration = 0.2f;
+    [SerializeField] private MonoBehaviour damagableObject;
+    [SerializeField] private Material blinkMaterial;
+    [SerializeField] private float blinkDuration = 0.2f;
 
 
     private float _blinkTimer;
@@ -23,9 +23,9 @@ public class FlashBlink : MonoBehaviour
 
     private void Start()
     {
-        if (_damagableObject is Player)
+        if (damagableObject is Player player) // является ли объект игроком > создаем переменную player
         {
-            (_damagableObject as Player).OnFlashBlink += DamagableObject_OnFlashBlink;
+            player.OnFlashBlink += DamagableObject_OnFlashBlink;
         }
     }
 
@@ -48,8 +48,8 @@ public class FlashBlink : MonoBehaviour
 
     private void SetBlinkingMaterial()
     {
-        _blinkTimer = _blinkDuration;
-        _spriteRenderer.material = _blinkMaterial;
+        _blinkTimer = blinkDuration;
+        _spriteRenderer.material = blinkMaterial;
     }
 
     private void SetDefaultMaterial()
@@ -65,9 +65,9 @@ public class FlashBlink : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (_damagableObject is Player)
+        if (damagableObject is Player player)
         {
-            (_damagableObject as Player).OnFlashBlink -= DamagableObject_OnFlashBlink; // отписываемся от события при смерти
+            player.OnFlashBlink -= DamagableObject_OnFlashBlink; // отписываемся от события при смерти
         }
     }
 }
