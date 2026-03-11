@@ -1,14 +1,19 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [SelectionBase] // чтобы всегда на сцене выбирался Player
 
 public class Player : MonoBehaviour
 {
+
+
     public event EventHandler OnPlayerDeath;
     public event EventHandler OnFlashBlink;
+    public event EventHandler OnHealthChanged; // событие, вызываемое при изменении здоровья
+
+    public int CurrentHealth => _currentHealth; // текущее здоровье (только чтение)
+    public int MaxHealth => maxHealth;           // максимальное здоровье
 
 
     public static Player Instance { get; private set; } // singltone pattern
@@ -56,6 +61,9 @@ public class Player : MonoBehaviour
     {
         _canTakeDamage = true;
         _currentHealth = maxHealth;
+
+        OnHealthChanged?.Invoke(this, EventArgs.Empty); // при старте отобразить правильное значение
+
         GameInput.Instance.OnPlayerAttack += Player_OnPlayerAttack;
         GameInput.Instance.OnPlayerDash += Player_OnPlayerDash;
         _isAlive = true;
@@ -84,8 +92,8 @@ public class Player : MonoBehaviour
             _currentHealth = Math.Max(0, _currentHealth -= damage);
             Debug.Log(_currentHealth);
             _knockBack.GetKnockBack(damageSource);
-
             OnFlashBlink?.Invoke(this, EventArgs.Empty);
+            OnHealthChanged?.Invoke(this, EventArgs.Empty); 
 
             StartCoroutine(DamageRecoveryRoutine());
         }

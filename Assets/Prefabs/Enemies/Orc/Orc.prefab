@@ -237,7 +237,7 @@ MonoBehaviour:
   chasingDistance: 4
   isAttackingEnemy: 1
   attackCooldown: 1
-  attackingDistance: 1.5
+  attackingDistance: 1.9
 --- !u!114 &2723345168528341571
 MonoBehaviour:
   m_ObjectHideFlags: 0

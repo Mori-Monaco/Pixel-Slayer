@@ -18,7 +18,7 @@ public class EnemyAI : MonoBehaviour
 
     [SerializeField] private bool isAttackingEnemy = true; // атакующий ли враг
     [SerializeField] private float attackCooldown = 1f; // задержка
-    [SerializeField] private float attackingDistance = 2f; // дистанция атаки
+    [SerializeField] private float attackingDistance = 1.9f; // дистанция атаки
 
     public event EventHandler OnEnemyAttack;
 
