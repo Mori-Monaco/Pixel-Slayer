@@ -19,7 +19,7 @@ public class TransparancyDetection : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider) // когда дерево пересекает
     {
-        if (collider.gameObject.GetComponent<Player>()) // именно объект Player
+        if (collider.gameObject.GetComponent<Player>()) // объект Player
         {
             if (collider is CapsuleCollider2D)
                 StartCoroutine(FadeRoutine(_spriteRenderer, Transition, _spriteRenderer.color.a, TransparancyValue));
@@ -28,7 +28,7 @@ public class TransparancyDetection : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collider)
     {
-        if (collider.gameObject.GetComponent<Player>()) // именно объект Player
+        if (collider.gameObject.GetComponent<Player>()) // объект Player
         {
             if (collider is CapsuleCollider2D)
                 StartCoroutine(FadeRoutine(_spriteRenderer, Transition, _spriteRenderer.color.a, FULL_NON_TRANSPARENT));

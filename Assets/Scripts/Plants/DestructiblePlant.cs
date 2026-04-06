@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class DestructiblePlant : MonoBehaviour
 {
-
-
     public event EventHandler OnDestructibleTakeDamage;
 
 

@@ -28,14 +28,6 @@ public class Sword : MonoBehaviour
         FollowMousePosition();
     }
 
-    //public void Attack()
-    //{
-    //    AttackColliderTurnOffOn(); // вкл/выкл области атаки
-    //    OnSwordSwing?.Invoke(this, EventArgs.Empty);
-    //}
-
-
-
     public void Attack()
     {
         _polygonCollider2D.enabled = true;  // включаем коллайдер

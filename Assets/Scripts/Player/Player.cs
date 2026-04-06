@@ -112,6 +112,16 @@ public class Player : MonoBehaviour
         return playerScreenPosition;
     }
 
+    private void HandleMovement()
+    {
+        _rb.MovePosition(_rb.position + inputVector * (movingSpeed * Time.fixedDeltaTime)); // Time.fixedDeltaTime для плавного движения
+
+        if (Math.Abs(inputVector.x) > _minMovingSpeed || Math.Abs(inputVector.y) > _minMovingSpeed) // сравнение по модулю
+            _isRunning = true;
+        else
+            _isRunning = false;
+    }
+
     private void DetectDeath()
     {
         if (_currentHealth == 0 && _isAlive)
@@ -164,15 +174,6 @@ public class Player : MonoBehaviour
         Sword.Instance.Attack();
     }
 
-    private void HandleMovement()
-    {
-        _rb.MovePosition(_rb.position + inputVector * (movingSpeed * Time.fixedDeltaTime)); // Time.fixedDeltaTime для плавного движения
-
-        if (Math.Abs(inputVector.x) > _minMovingSpeed || Math.Abs(inputVector.y) > _minMovingSpeed) // сравнение по модулю
-            _isRunning = true;
-        else
-            _isRunning = false;
-    }
 
     private void OnDestroy()
     {
